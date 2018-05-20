@@ -13,7 +13,13 @@ SRC         =     srcs/ft_printf.c	\
 				  srcs/ft_atoi.c	\
 				  srcs/ft_putstrn.c	\
 				  srcs/printable_adv.c	\
-				  srcs/ft_putcharn.c
+				  srcs/ft_putcharn.c	\
+				  srcs/ft_putnbr.c		\
+				  srcs/ft_abs.c			\
+				  srcs/printnb.c		\
+				  srcs/ft_convert_base.c\
+				  srcs/printhexa.c		\
+				  srcs/ft_toupper.c
 
 
 C_GREEN	=	"\033[32m"

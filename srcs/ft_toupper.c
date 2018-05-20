@@ -1,23 +1,27 @@
-/*	************************************************************************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   precision_test.c                                   :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/20 16:37:10 by oespion          ###   ########.fr       */
+/*   Created: 2018/05/20 14:47:19 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/20 14:48:07 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libftprintf.h"
 
-void	ft_printf(const char *format, ...);
-
-int main()
+char	*ft_toupper(char *str)
 {
-	ft_printf("%30.15u", 0);
-	printf("%c", '\n');
-	printf("\nstdout = %d\n", printf("%30.15d", 0));
-	return (0);
+	int	r;
+
+	r = 0;
+	while (str[r])
+	{
+		if (str[r] >= 'a' && str[r] <= 'z')
+			str[r] -= 32;
+		r++;
+	}
+	return (str);
 }

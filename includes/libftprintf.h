@@ -46,8 +46,10 @@ typedef struct	s_list
 
 int	ft_printf(const char* format, ...);
 
-int	ft_int_len(long long nb);
+char	*ft_convert_base(uintmax_t nb, int base);
+int	longlong_len(intmax_t nb);
 const char	*end_of_int(const char *str);
+int	uintmax_t_len(uintmax_t nb);
 int	ft_strlen(char *str);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
@@ -56,6 +58,17 @@ int	ft_atoi(const char *str);
 void	printchar(t_list *p, char letter);
 void	ft_putcharnf(t_list *p);
 void	ft_putcharn(t_list *p, char c);
+void	ft_putnbr(intmax_t nb);
+uintmax_t	ft_abs(long long nb);
+void	printunb(t_list*p, int maj);
+void	printhexa(t_list *p, int maj);
+char	*ft_toupper(char *str);
+
+intmax_t	getnb(t_list *p, int maj);
+uintmax_t	getunb(t_list *p, int maj);
+void	printnb(t_list *p, int maj);
+void	ft_putnbr_uintmax(uintmax_t nb);
+void	printoctal(t_list *p, int maj);
 
 void	write_with_precision(char *str, t_list *p);
 void	ft_putstrn(t_list *p, char *str);
