@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/20 15:50:37 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/21 12:29:28 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ void	ft_get_arg(char letter, t_list *p)
 			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D')
 		p->increment = 1;
 	if (letter == 's')
-	{
 		prints(p);
-	}
 	else if (letter == 'd' || letter == 'i')
 		printnb(p, 0);
 	else if (letter == 'c' || letter == '%')

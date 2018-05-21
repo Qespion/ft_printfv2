@@ -36,6 +36,8 @@ typedef struct	s_list
 	int				blank;
 	int				neg;
 	int				sharp;
+	int				nopesign;
+	int				hexa;
 	int				h;
 	int				hh;
 	int				l;
