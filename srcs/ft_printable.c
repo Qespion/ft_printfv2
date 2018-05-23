@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/21 12:29:28 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/23 18:23:38 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ void	prints(t_list *p)
 
 	str = va_arg(p->ap, char*);
 	if (!str)
-	{
-		ft_putstr("(null)");
-		p->nbout += 6;
-		return ;
-	}
+		str = "(null)";
 	if (p->precision != -1 || p->width != -1)
 		ft_putstrn(p, str);
 	else
@@ -37,7 +33,8 @@ void	ft_get_arg(char letter, t_list *p)
 {
 	if (letter == 's' || letter == 'd' || letter == 'c' || letter == 'x'
 			|| letter == 'b' || letter == 'i' || letter == 'X' || letter == 'u'
-			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D')
+			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D'
+			|| letter == '%' || letter == 'p')
 		p->increment = 1;
 	if (letter == 's')
 		prints(p);
@@ -58,7 +55,9 @@ void	ft_get_arg(char letter, t_list *p)
 	else if (letter == 'o')
 		printoctal(p, 0);
 	else if (letter == 'O')
-		printoctal(p, 1);/*
+		printoctal(p, 1);
+	else if (letter == 'p')
+		printaddress(p);/*
 	else if (letter == 'b')
 		printbinary(p);
 	*/

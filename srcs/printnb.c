@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 12:48:45 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/21 17:04:50 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/23 17:51:13 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_get_width(t_list *p, uintmax_t nbr)
 	max = 0;
 	width_tmp = p->width;
 	spaces = ' ';
+	p->nopesign == 0 && p->blank == 1 && !p->neg && !p->positive? max++ : 0;
 	nbr == 0 && p->precision == 0 && p->width > 0 ? ft_putchar(' ') : 0;
 	nbr == 0 && p->precision == 0 && p->width > 0 ? p->nbout++ : 0;
 	p->zeros && !p->negative && p->precision == -1? spaces = '0' : 0;
@@ -110,6 +111,7 @@ void	ft_get_width(t_list *p, uintmax_t nbr)
 	else
 		max += p->precision;
 	p->neg == 2 ? width_tmp-- : 0;
+	p->blank && p->negative && p->width > uintmax_t_len(nbr) ? max++ : 0;
 	while (max < width_tmp--)
 	{
 		p->nbout++;
@@ -180,10 +182,13 @@ void	printnb(t_list *p, int maj)
 
 	nb = getnb(p, maj);
 	p->nopesign = 0;
-	p->blank && p->width == -1 && nb >= 0 && !p->positive? ft_putchar(' ') : 0;
-	p->blank && p->width == -1 && nb >= 0 && !p->positive? p->nbout++ : 0;
 	if (p->precision == -1 && p->width == -1)
 	{
+		if (p->blank && p->width == -1 && nb >= 0 && !p->positive)
+		{
+			ft_putchar(' ');
+			p->nbout++;
+		}
 		if (p->positive && nb >= 0)
 		{
 			p->nbout++;
@@ -193,7 +198,14 @@ void	printnb(t_list *p, int maj)
 		ft_putnbr(nb);
 	}
 	else
+	{
+		if (!p->positive && p->blank && nb >= 0)
+		{
+			p->nbout++;
+			ft_putchar(' ');
+		}
 		printnbu(p, nb);
+	}
 }
 
 void	printunb(t_list *p, int maj)

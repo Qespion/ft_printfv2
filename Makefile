@@ -19,7 +19,8 @@ SRC         =     srcs/ft_printf.c	\
 				  srcs/printnb.c		\
 				  srcs/ft_convert_base.c\
 				  srcs/printhexa.c		\
-				  srcs/ft_toupper.c
+				  srcs/ft_toupper.c		\
+				  srcs/ft_printaddress.c
 
 
 C_GREEN	=	"\033[32m"

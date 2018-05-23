@@ -1,26 +1,23 @@
-/*	************************************************************************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   precision_test.c                                   :+:      :+:    :+:   */
+/*   ft_printaddress.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/23 18:50:30 by oespion          ###   ########.fr       */
+/*   Created: 2018/05/23 18:23:55 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/23 18:50:09 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftprintf.h"
 #include <stdio.h>
 
-void	ft_printf(const char *format, ...);
-
-int main()
+void	printaddress(t_list *p)
 {
-	char	*test;
-
-	test = "rer";
-	ft_printf("%p", test);
-	printf("\n");
-	printf("\nstdout = %d\n", printf("%-0 #.25p", test));
-	return (0);
+	uintmax_t	adr;
+	char		*total;
+	adr = (uintmax_t)va_arg(p->ap, void*);
+	total = ft_convert_base(adr, 16);
+	ft_putstr(total);
 }

@@ -66,8 +66,10 @@ void	printunb(t_list*p, int maj);
 void	printhexa(t_list *p, int maj);
 char	*ft_toupper(char *str);
 
+void	printaddress(t_list *p);
 intmax_t	getnb(t_list *p, int maj);
 uintmax_t	getunb(t_list *p, int maj);
+void	ft_putstrn_hexa(t_list *p, char *str, int maj);
 void	printnb(t_list *p, int maj);
 void	ft_putnbr_uintmax(uintmax_t nb);
 void	printoctal(t_list *p, int maj);
