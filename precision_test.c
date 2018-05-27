@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/23 18:50:30 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:22:43 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int main()
 {
 	char	*test;
 
-	test = "rer";
-	ft_printf("%p", test);
+	test = NULL;
+	ft_printf("%#5.6o", 0);
 	printf("\n");
-	printf("\nstdout = %d\n", printf("%-0 #.25p", test));
+	printf("\nstdout = %d\n", printf("%#5.6o", 0));
 	return (0);
 }
