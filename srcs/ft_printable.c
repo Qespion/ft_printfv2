@@ -6,12 +6,11 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/27 11:58:27 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:06:06 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 void	prints(t_list *p)
 {
@@ -34,7 +33,7 @@ void	ft_get_arg(char letter, t_list *p)
 	if (letter == 's' || letter == 'd' || letter == 'c' || letter == 'x'
 			|| letter == 'b' || letter == 'i' || letter == 'X' || letter == 'u'
 			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D'
-			|| letter == '%' || letter == 'p')
+			|| letter == '%' || letter == 'p' || letter == 'c')
 		p->increment = 1;
 	if (letter == 's')
 		prints(p);
@@ -58,6 +57,8 @@ void	ft_get_arg(char letter, t_list *p)
 		printoctal(p, 1);
 	else if (letter == 'p')
 		printaddress(p);/*
+	else if (letter == 'c')
+		printunicode(p);
 	else if (letter == 'b')
 		printbinary(p);
 	*/

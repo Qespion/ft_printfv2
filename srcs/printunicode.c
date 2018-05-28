@@ -1,26 +1,19 @@
-/*	************************************************************************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   precision_test.c                                   :+:      :+:    :+:   */
+/*   printunicode.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 14:55:41 by oespion          ###   ########.fr       */
+/*   Created: 2018/05/28 12:37:33 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/28 12:39:07 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftprintf.h"
 #include <stdio.h>
 
-void	ft_printf(const char *format, ...);
-
-int main()
+void	printunicode(t_list *p)
 {
-	char	*test;
-
-	test = NULL;
-	ft_printf("%c", 24);
-	printf("\n");
-	printf("\nstdout = %d\n", printf("%C", 526));
-	return (0);
+	(void)p;
 }

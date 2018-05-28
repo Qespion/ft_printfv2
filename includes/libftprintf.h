@@ -79,5 +79,8 @@ void	ft_putstrn(t_list *p, char *str);
 t_list	*create_struct(void);
 t_list	*reset_struct(t_list *p);
 void	ft_get_arg(char letter, t_list *p);
+void	printunicode(t_list *p);
 
+void	ft_get_width(t_list *p, uintmax_t nbr);
+void	ft_get_precision(uintmax_t nbr, t_list *p);
 #endif

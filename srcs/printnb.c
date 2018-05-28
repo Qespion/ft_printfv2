@@ -6,54 +6,12 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 12:48:45 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/27 12:11:02 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:19:48 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdio.h>
-
-intmax_t	getnb(t_list *p, int maj)
-{
-	intmax_t	nb;
-
-	if (p->l || maj)
-		nb = va_arg(p->ap, long);
-	else if (p->ll)
-		nb = va_arg(p->ap, long long);
-	else if (p->z)
-		nb = va_arg(p->ap, size_t);
-	else if (p->j)
-		nb = va_arg(p->ap, intmax_t);
-	else if (p->h)
-		nb = (short)va_arg(p->ap, int);
-	else if (p->hh)
-		nb = (char)va_arg(p->ap, int);
-	else
-		nb = va_arg(p->ap, int);
-	return (nb);
-}
-
-uintmax_t	getunb(t_list *p, int maj)
-{
-	uintmax_t	nb;
-
-	if (p->l || maj)
-		nb = va_arg(p->ap, unsigned long);
-	else if (p->ll)
-		nb = va_arg(p->ap, unsigned long long);
-	else if (p->z)
-		nb = va_arg(p->ap, size_t);
-	else if (p->j)
-		nb = va_arg(p->ap, uintmax_t);
-	else if (p->h)
-		nb = (unsigned short)va_arg(p->ap, unsigned int);
-	else if (p->hh)
-		nb = (unsigned char)va_arg(p->ap, unsigned int);
-	else
-		nb = va_arg(p->ap, unsigned int);
-	return (nb);
-}
 
 void	ft_pos(t_list *p)
 {
@@ -87,11 +45,20 @@ void	ft_get_precision(uintmax_t nbr, t_list *p)
 	}
 }
 
+void	width_write(int max, int width_tmp, char spaces, t_list *p)
+{
+	while (max < width_tmp--)
+	{
+		p->nbout++;
+		ft_putchar(spaces);
+	}
+}
+
 void	ft_get_width(t_list *p, uintmax_t nbr)
 {
-	int	spaces;
-	int	max;
-	int	width_tmp;
+	char	spaces;
+	int		max;
+	int		width_tmp;
 
 	max = 0;
 	width_tmp = p->width;
@@ -112,11 +79,7 @@ void	ft_get_width(t_list *p, uintmax_t nbr)
 		max += p->precision;
 	p->neg == 2 ? width_tmp-- : 0;
 	p->blank && p->negative && p->width > uintmax_t_len(nbr) ? max++ : 0;
-	while (max < width_tmp--)
-	{
-		p->nbout++;
-		ft_putchar(spaces);
-	}
+	width_write(max, width_tmp, spaces, p);
 }
 
 void	printnbu(t_list *p, intmax_t nb)
@@ -125,34 +88,6 @@ void	printnbu(t_list *p, intmax_t nb)
 
 	nb < 0 ? p->neg = 1 : 0;
 	pos = ft_abs(nb);
-	if (p->negative)
-	{
-		ft_get_precision(pos, p);
-		if (p->precision == 0 && nb == 0)
-		{
-			ft_get_width(p, pos);
-			return ;
-		}
-		p->nbout += uintmax_t_len(pos);
-		ft_putnbr_uintmax(pos);
-		ft_get_width(p, pos);
-	}
-	else
-	{
-		ft_get_width(p, pos);
-		ft_get_precision(pos, p);
-		if (p->precision == 0 && nb == 0)
-			return ;
-		p->nbout += uintmax_t_len(pos);
-		ft_putnbr_uintmax(pos);
-	}
-}
-
-void	printnbunsigned(t_list *p, uintmax_t nb)
-{
-	uintmax_t	pos;
-
-	pos = nb;
 	if (p->negative)
 	{
 		ft_get_precision(pos, p);
@@ -205,22 +140,5 @@ void	printnb(t_list *p, int maj)
 			ft_putchar(' ');
 		}
 		printnbu(p, nb);
-	}
-}
-
-void	printunb(t_list *p, int maj)
-{
-	uintmax_t	nb;
-
-	nb = getunb(p, maj);
-	p->nopesign = 1;
-	if (p->precision == -1 && p->width == -1)
-	{
-		p->nbout += uintmax_t_len(nb);
-		ft_putnbr_uintmax(nb);
-	}
-	else
-	{
-		printnbunsigned(p, nb);
 	}
 }
