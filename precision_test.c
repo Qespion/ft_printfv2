@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 14:55:41 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:01:22 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int main()
 	char	*test;
 
 	test = NULL;
-	ft_printf("%c", 24);
+	ft_printf("%C", 0x1234);
 	printf("\n");
-	printf("\nstdout = %d\n", printf("%C", 526));
+	printf("\nstdout = %d\n", printf("%c", 54));
 	return (0);
 }

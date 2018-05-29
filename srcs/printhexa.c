@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 14:35:35 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:22:07 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/29 11:55:17 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,33 +128,7 @@ void	printhexa(t_list *p, int maj)
 		return ;
 	else
 		ft_putstrn_hexa(p, total, maj);
+//	printf("total === %c et %c\n", total[0], total[1]);
 //	ft_strdel(&total);
 }
 
-void	printoctal(t_list *p, int maj)
-{
-	intmax_t	nb;
-	char		*total;
-
-	p->hexa = 0;
-	nb = getunb(p, 0);
-	total = ft_convert_base(nb, 8);
-	total[0] == '\0' ? total = "0" : 0;
-	if (maj)
-		total = ft_toupper(total);
-	if (p->precision == -1 && p->width == -1)
-	{
-		p->nbout += ft_strlen(total);
-		if (p->sharp && total[0] != '0')
-		{
-			ft_putchar('0');
-			p->nbout++;
-		}
-		ft_putstr(total);
-	}
-	else if (total[0] == '0' && p->precision == 0 && p->width == -1 && !p->sharp)
-		return ;
-	else
-		ft_putstrn_octal(p, total);
-//	ft_strdel(&total);
-}

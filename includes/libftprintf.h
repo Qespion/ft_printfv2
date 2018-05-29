@@ -73,6 +73,8 @@ void	ft_putstrn_hexa(t_list *p, char *str, int maj);
 void	printnb(t_list *p, int maj);
 void	ft_putnbr_uintmax(uintmax_t nb);
 void	printoctal(t_list *p, int maj);
+int		bin_to_dec(char *bin);
+char	*ft_strjoin(char *s1, char *s2);
 
 void	write_with_precision(char *str, t_list *p);
 void	ft_putstrn(t_list *p, char *str);
@@ -80,7 +82,15 @@ t_list	*create_struct(void);
 t_list	*reset_struct(t_list *p);
 void	ft_get_arg(char letter, t_list *p);
 void	printunicode(t_list *p);
+char	*ft_convert_binary(uintmax_t nb);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strcat(char *dest, const char *src);
 
 void	ft_get_width(t_list *p, uintmax_t nbr);
 void	ft_get_precision(uintmax_t nbr, t_list *p);
+void	ft_pos(t_list *p);
+void	width_write(int max, int width_tmp, char spaces, t_list *p);
+void	printbinary(t_list *p);
+
+void	ft_putstrn_octal(t_list *p, char *str);
 #endif

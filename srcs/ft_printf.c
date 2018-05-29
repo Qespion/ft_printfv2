@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 11:52:36 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:20:37 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/29 13:12:29 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	ft_printf(const char* format, ...)
 	va_end(p->ap);
 //	printf("precision = %d\n", p->precision);
 //			************************************penser a mettre le -1 au retour
-//	printf("\nstdout = %d\n", p->nbout);
+	printf("\nstdout = %d\n", p->nbout);
 //	printf("width = %d\n", p->width);
 	outnbr = p->nbout;
 	//ft_strdel(&p->base_str);

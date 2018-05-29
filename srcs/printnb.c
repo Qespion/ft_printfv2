@@ -6,53 +6,11 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 12:48:45 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:19:48 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:38:58 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
-
-void	ft_pos(t_list *p)
-{
-	if (p->positive == 1 && !p->neg && !p->nopesign)
-	{
-		p->nbout++;
-		ft_putchar('+');
-		p->neg = 3;
-		p->width > 0 ? p->width-- : 0;
-	}
-	if (p->neg == 1)
-	{
-		p->nbout++;
-		ft_putchar('-');
-		p->neg = 2;
-	}
-	p->positive = 2;
-}
-
-void	ft_get_precision(uintmax_t nbr, t_list *p)
-{
-	int	precision_tmp;
-
-	precision_tmp = p->precision;
-	ft_pos(p);
-	while (uintmax_t_len(nbr) < precision_tmp)
-	{
-		ft_putchar('0');
-		p->nbout++;
-		precision_tmp--;
-	}
-}
-
-void	width_write(int max, int width_tmp, char spaces, t_list *p)
-{
-	while (max < width_tmp--)
-	{
-		p->nbout++;
-		ft_putchar(spaces);
-	}
-}
 
 void	ft_get_width(t_list *p, uintmax_t nbr)
 {
@@ -63,16 +21,16 @@ void	ft_get_width(t_list *p, uintmax_t nbr)
 	max = 0;
 	width_tmp = p->width;
 	spaces = ' ';
-	p->nopesign == 0 && p->blank == 1 && !p->neg && !p->positive? max++ : 0;
+	p->nopesign == 0 && p->blank == 1 && !p->neg && !p->positive ? max++ : 0;
 	nbr == 0 && p->precision == 0 && p->width > 0 ? ft_putchar(' ') : 0;
 	nbr == 0 && p->precision == 0 && p->width > 0 ? p->nbout++ : 0;
-	p->zeros && !p->negative && p->precision == -1? spaces = '0' : 0;
+	p->zeros && !p->negative && p->precision == -1 ? spaces = '0' : 0;
 	if ((p->neg || p->positive) && !p->negative)
 		width_tmp--;
 	if (spaces == '0' && p->neg && !p->negative)
 		ft_pos(p);
 	((p->neg == 1 || p->neg == 2) && spaces == '0') ? max-- : 0;
-	spaces == '0' && !p->negative && p->positive ? ft_pos(p): 0;
+	spaces == '0' && !p->negative && p->positive ? ft_pos(p) : 0;
 	if (uintmax_t_len(nbr) > p->precision)
 		max += uintmax_t_len(nbr);
 	else
@@ -111,6 +69,16 @@ void	printnbu(t_list *p, intmax_t nb)
 	}
 }
 
+void	printnb_nbu(t_list *p, intmax_t nb)
+{
+	if (!p->positive && p->blank && nb >= 0)
+	{
+		p->nbout++;
+		ft_putchar(' ');
+	}
+	printnbu(p, nb);
+}
+
 void	printnb(t_list *p, int maj)
 {
 	intmax_t	nb;
@@ -133,12 +101,5 @@ void	printnb(t_list *p, int maj)
 		ft_putnbr(nb);
 	}
 	else
-	{
-		if (!p->positive && p->blank && nb >= 0)
-		{
-			p->nbout++;
-			ft_putchar(' ');
-		}
-		printnbu(p, nb);
-	}
+		printnb_nbu(p, nb);
 }

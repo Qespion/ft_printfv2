@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:06:39 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:11:59 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/28 15:39:45 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ uintmax_t	getunb(t_list *p, int maj)
 	return (nb);
 }
 
-void	printnbunsigned(t_list *p, uintmax_t nb)
+void		printnbunsigned(t_list *p, uintmax_t nb)
 {
 	uintmax_t	pos;
 
@@ -82,7 +82,7 @@ void	printnbunsigned(t_list *p, uintmax_t nb)
 	}
 }
 
-void	printunb(t_list *p, int maj)
+void		printunb(t_list *p, int maj)
 {
 	uintmax_t	nb;
 

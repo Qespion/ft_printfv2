@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printable_adv.c                                    :+:      :+:    :+:   */
+/*   printbinary.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:41:09 by oespion          ###   ########.fr       */
+/*   Created: 2018/05/29 15:28:40 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/29 15:30:56 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	printchar(t_list *p, char letter)
+void	printbinary(t_list *p)
 {
-	char c;
+	int		brett;
+	char	*total;
 
-	if (letter != '%')
-		c = va_arg(p->ap, int);
-	if ((p->precision != -1 || p->width != -1)
-			&& letter == '%')
-		ft_putcharnf(p);
-	else if (p->precision != -1 || p->width != -1)
+	brett = va_arg(p->ap, int);
+	total = ft_convert_binary(brett);
+	while (*total)
 	{
-		ft_putcharn(p, c);
-	}
-	else
-	{
-		if (letter == '%')
-			ft_putchar('%');
-		if (letter != '%')
-		{
-			p->nbout++;
-			ft_putchar(c);
-		}
+		ft_putchar(*total);
+		total++;
+		p->nbout++;
 	}
 }

@@ -22,7 +22,12 @@ SRC         =     srcs/ft_printf.c	\
 				  srcs/ft_toupper.c		\
 				  srcs/ft_printaddress.c\
 				  srcs/printunicode.c	\
-				  srcs/printunsigned.c
+				  srcs/printunsigned.c	\
+				  srcs/nb_p_and_w.c		\
+				  srcs/printbinary.c	\
+				  srcs/ft_strjoin.c		\
+				  srcs/ft_bzero.c		\
+				  srcs/ft_strcat.c
 
 
 C_GREEN	=	"\033[32m"

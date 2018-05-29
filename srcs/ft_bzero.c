@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printable_adv.c                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:41:09 by oespion          ###   ########.fr       */
+/*   Created: 2018/04/04 11:32:19 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/29 17:36:18 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	printchar(t_list *p, char letter)
+void	ft_bzero(void *s, size_t n)
 {
-	char c;
+	size_t r;
 
-	if (letter != '%')
-		c = va_arg(p->ap, int);
-	if ((p->precision != -1 || p->width != -1)
-			&& letter == '%')
-		ft_putcharnf(p);
-	else if (p->precision != -1 || p->width != -1)
+	r = 0;
+	while (r < n)
 	{
-		ft_putcharn(p, c);
-	}
-	else
-	{
-		if (letter == '%')
-			ft_putchar('%');
-		if (letter != '%')
-		{
-			p->nbout++;
-			ft_putchar(c);
-		}
+		((unsigned char*)s)[r] = 0;
+		r++;
 	}
 }

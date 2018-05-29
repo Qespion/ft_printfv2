@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printable_adv.c                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:41:09 by oespion          ###   ########.fr       */
+/*   Created: 2018/04/04 11:21:55 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/29 17:36:10 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	printchar(t_list *p, char letter)
+char	*ft_strcat(char *dest, const char *src)
 {
-	char c;
+	int	r;
+	int	i;
 
-	if (letter != '%')
-		c = va_arg(p->ap, int);
-	if ((p->precision != -1 || p->width != -1)
-			&& letter == '%')
-		ft_putcharnf(p);
-	else if (p->precision != -1 || p->width != -1)
+	i = ft_strlen(dest);
+	r = 0;
+	while (src[r])
 	{
-		ft_putcharn(p, c);
+		dest[i] = ((char*)src)[r];
+		i++;
+		r++;
 	}
-	else
-	{
-		if (letter == '%')
-			ft_putchar('%');
-		if (letter != '%')
-		{
-			p->nbout++;
-			ft_putchar(c);
-		}
-	}
+	dest[i] = '\0';
+	return (dest);
 }

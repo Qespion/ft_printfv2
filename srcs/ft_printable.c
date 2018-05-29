@@ -6,11 +6,38 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:06:06 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/29 15:30:58 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+void	printoctal(t_list *p, int maj)
+{
+	intmax_t	nb;
+	char		*total;
+
+	p->hexa = 0;
+	nb = getunb(p, 0);
+	total = ft_convert_base(nb, 8);
+	total[0] == '\0' ? total = "0" : 0;
+	if (maj)
+		total = ft_toupper(total);
+	if (p->precision == -1 && p->width == -1)
+	{
+		p->nbout += ft_strlen(total);
+		if (p->sharp && total[0] != '0')
+		{
+			ft_putchar('0');
+			p->nbout++;
+		}
+		ft_putstr(total);
+	}
+	else if (total[0] == '0' && p->precision == 0 && p->width == -1 && !p->sharp)
+		return ;
+	else
+		ft_putstrn_octal(p, total);
+}
 
 void	prints(t_list *p)
 {
@@ -33,7 +60,7 @@ void	ft_get_arg(char letter, t_list *p)
 	if (letter == 's' || letter == 'd' || letter == 'c' || letter == 'x'
 			|| letter == 'b' || letter == 'i' || letter == 'X' || letter == 'u'
 			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D'
-			|| letter == '%' || letter == 'p' || letter == 'c')
+			|| letter == '%' || letter == 'p' || letter == 'C')
 		p->increment = 1;
 	if (letter == 's')
 		prints(p);
@@ -56,10 +83,9 @@ void	ft_get_arg(char letter, t_list *p)
 	else if (letter == 'O')
 		printoctal(p, 1);
 	else if (letter == 'p')
-		printaddress(p);/*
-	else if (letter == 'c')
+		printaddress(p);
+	else if (letter == 'C')
 		printunicode(p);
 	else if (letter == 'b')
 		printbinary(p);
-	*/
 }

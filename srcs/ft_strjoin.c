@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printable_adv.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:41:09 by oespion          ###   ########.fr       */
+/*   Created: 2018/04/05 14:24:03 by oespion           #+#    #+#             */
+/*   Updated: 2018/05/29 17:34:13 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	printchar(t_list *p, char letter)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char c;
+	char	*str;
+	int		len;
 
-	if (letter != '%')
-		c = va_arg(p->ap, int);
-	if ((p->precision != -1 || p->width != -1)
-			&& letter == '%')
-		ft_putcharnf(p);
-	else if (p->precision != -1 || p->width != -1)
-	{
-		ft_putcharn(p, c);
-	}
-	else
-	{
-		if (letter == '%')
-			ft_putchar('%');
-		if (letter != '%')
-		{
-			p->nbout++;
-			ft_putchar(c);
-		}
-	}
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_bzero(str, len + 1);
+	ft_strcat(str, s1);
+	ft_strcat(str, s2);
+	return (str);
 }
