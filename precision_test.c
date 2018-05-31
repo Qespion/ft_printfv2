@@ -6,21 +6,24 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:23 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 16:01:22 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 19:20:19 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <locale.h>
+#include <wchar.h>
 
 void	ft_printf(const char *format, ...);
 
 int main()
 {
-	char	*test;
+	setlocale(LC_ALL, "");
+	wchar_t	test;
 
-	test = NULL;
-	ft_printf("%C", 0x1234);
+	test = 0x23;
+	ft_printf("%s %C fdsfsdf", "dsf", 0x110000);
 	printf("\n");
-	printf("\nstdout = %d\n", printf("%c", 54));
+	printf("\nstdout = %d\n", printf("%s %C fdsfsda", "fds", 0x110000));
 	return (0);
 }

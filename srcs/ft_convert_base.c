@@ -6,12 +6,11 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 14:37:21 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 17:22:10 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 16:26:40 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 int		int_len(uintmax_t nb, int base)
 {
@@ -34,6 +33,8 @@ char	*ft_convert_base(uintmax_t nb, int base)
 
 	tab = "0123456789abcdef";
 	len = int_len(nb, base);
+	if (len == 0)
+		return ("\0");
 	if(!(total = (char*)malloc(sizeof(char) * len)))
 		return (0);
 	total[len--] = '\0';

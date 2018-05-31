@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 14:35:35 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 11:55:17 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 16:22:42 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ void	printhexa(t_list *p, int maj)
 		return ;
 	else
 		ft_putstrn_hexa(p, total, maj);
-//	printf("total === %c et %c\n", total[0], total[1]);
-//	ft_strdel(&total);
+	total[0] != '0' ? ft_strdel(&total) : 0;
 }
 

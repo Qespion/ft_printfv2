@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 18:23:55 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:42:34 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:27:22 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	printaddress(t_list *p)
 
 	adr = (uintmax_t)va_arg(p->ap, void*);
 	total = ft_convert_base(adr, 16);
+	total[0] == '\0' ? total = "0" : 0;
 	if (p->negative)
 	{
 		ft_putstr("0x");
@@ -66,5 +67,5 @@ void	printaddress(t_list *p)
 	}
 	total[0] == '\0' ? p->nbout++ : 0;
 	p->nbout += ft_strlen(total) + 2;
-	ft_strdel(&total);
+	total[0] != '0' ? ft_strdel(&total) : 0;
 }

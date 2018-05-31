@@ -6,12 +6,11 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 11:52:36 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 13:12:29 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 19:20:39 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 const char	*ft_flags(const char *format, t_list *p)
 {
@@ -102,6 +101,30 @@ const char	*ft_lenght_mod(const char *format, t_list *p)
 	return (format);
 }
 
+int checkafter(const char* format, t_list *p)
+{
+	int	r;
+
+	r = 0;
+	while (format[r] != '%' && format[r])
+		r++;
+	if (format[r] == '%')
+	{
+		r++;
+		while (format[r] != 's' && format[r] != 'd' && format[r] != 'c' && format[r] != 'x'
+		&& format[r] != 'b' && format[r] != 'i' && format[r] != 'X' && format[r] != 'u'
+		&& format[r] != 'o' && format[r] != 'O' && format[r] != 'U' && format[r] != 'D'
+		&& format[r] != '%' && format[r] != 'p' && format[r] != 'C' && format[r])
+			r++;
+		if (format[r] == 'C')
+		{
+			if (checkunicode(p))
+				return (0);
+		}
+	}
+	return (1);
+}
+
 int	ft_printf(const char* format, ...)
 {
 	t_list	*p;
@@ -121,20 +144,23 @@ int	ft_printf(const char* format, ...)
 		}
 		*format == '%' ? p->nbout++ : 0;
 		p->increment ? format++ : 0;
-		if (*format != '\0' && *format != '%')
+		if (*format != '\0' && *format != '%' && checkafter(format, p) == 1)
 		{
 			p->nbout++;
 			ft_putchar((char)*format);
 			format++;
 		}
+		else
+			break ;
 		p = reset_struct(p);
 	}
 	va_end(p->ap);
 //	printf("precision = %d\n", p->precision);
 //			************************************penser a mettre le -1 au retour
-	printf("\nstdout = %d\n", p->nbout);
+//	printf("\nstdout = %d\n", p->nbout);
 //	printf("width = %d\n", p->width);
-	outnbr = p->nbout;
+	outnbr = (p->brett == -1 ? -1 : p->nbout);
+//	printf("pbrett === %d\n", p->brett);
 	//ft_strdel(&p->base_str);
 	free(p);
 	return (outnbr);

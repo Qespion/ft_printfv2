@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 15:30:58 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:28:07 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	printoctal(t_list *p, int maj)
 		return ;
 	else
 		ft_putstrn_octal(p, total);
+	total[0] != '0' ? ft_strdel(&total) : 0;
 }
 
 void	prints(t_list *p)

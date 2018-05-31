@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 12:37:33 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/29 17:58:56 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 19:14:25 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	print_first(char *binary, int nlen)
 	int		r;
 	char	tab[] = "00000000";
 	int		index;
-	char	*hexa;
 
 	index = (ft_strlen(binary) - (nlen - 1) * 6) - 1;
 	r = 0;
@@ -33,8 +32,25 @@ void	print_first(char *binary, int nlen)
 		r--;
 	}
 	r = bin_to_dec(tab);
-	hexa = ft_strjoin("0x", ft_convert_base(r, 16));
-	ft_printf("\nFIRST HEXA %s\n", hexa);
+	write(1, &r, 1);
+}
+
+void	print_uni_width(t_list *p, int nlen)
+{
+	int		width_tmp;
+	int		r;
+	char	spaces;
+
+	spaces = ' ';
+	r = 0;
+	p->zeros ? spaces = '0' : 0;
+	width_tmp = p->width - nlen;
+	while (r < width_tmp)
+	{
+		p->nbout++;
+		ft_putchar(spaces);
+		r++;
+	}
 }
 
 void	print_rest(char *binary, int index)
@@ -47,39 +63,77 @@ void	print_rest(char *binary, int index)
 	{
 		tab[r++] = binary[index++];
 	}
-	//ft_printf("\nbin = %s\n", tab);
 	r = bin_to_dec(tab);
-	ft_printf("\nNEXT HEXA %#x\n", r);
-//	write(1, "0x"ft_convert_base(r, 16), 1);
+//	printf("str == %s\n", tab);
+//	printf("start nb  = %d\n", r);
+	write(1, &r, 1);
 }
 
-void	break_bin(char *binary)
+void	break_bin(char *binary, t_list *p)
 {
 	int	r;
 	int	nlen;
 	int	index;
+	int	tmp;
 
 	r = ft_strlen(binary) - 1;
 	nlen = r / 6;
 	if (r > 0)
 		nlen += (r % 6 < 5) ? 1 : 2;
 	index = (ft_strlen(binary) - (nlen - 1) * 6);
+	!p->negative ? print_uni_width(p, nlen) : 0;
+	tmp = nlen;
 	print_first(binary, nlen);
+	p->nbout += nlen;
 	while (nlen - 1 > 0)
 	{
 		print_rest(binary, index);
 		nlen--;
 		index += 6;
 	}
+	p->negative ? print_uni_width(p, tmp) : 0;
 }
 
-void	printunicode(t_list *p)
+int		printunicode(t_list *p)
 {
 	int		brett;
 	char	*binary;
 
-	brett = va_arg(p->ap, int);
+	!p->brett ? brett = va_arg(p->ap, int) : 0;
+	p->brett ? brett = p->brett : 0;
+	if ((MB_CUR_MAX == 1 && brett > 255) || (brett <= 917759 && brett >= 917632)
+			|| (brett <= 196608 && brett >= 917503)|| (brett >= 918000 && brett <= 983039)
+			|| (brett >= 55296 && brett <= 57343)|| (brett >= 196608 && brett <= 917503)
+			|| brett >= 1114112)
+	{
+		p->brett = -1;
+		return (0);
+	}
+	if (brett < 256)
+	{
+		write(1, &brett, 1);
+		p->nbout++;
+		return (1);
+	}
 	binary = ft_convert_base(brett, 2);
-//	printf("number === %s\n", binary);
-	break_bin(binary);
+	break_bin(binary, p);
+	return (1);
+}
+
+int		checkunicode(t_list *p)
+{
+	int		brett;
+
+	brett = va_arg(p->ap, int);
+//	printf("brett is equal to = %d\n", brett);
+	if ((MB_CUR_MAX == 1 && brett > 255) || (brett <= 917759 && brett >= 917632)
+			|| (brett <= 196608 && brett >= 917503)|| (brett >= 918000 && brett <= 983039)
+			|| (brett >= 55296 && brett <= 57343)|| (brett >= 196608 && brett <= 917503)
+			|| brett >= 1114112)
+	{
+		p->brett = -1;
+		return (1);
+	}
+	p->brett = brett;
+	return (0);
 }

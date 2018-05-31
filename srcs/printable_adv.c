@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/28 15:41:09 by oespion          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:16:50 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	printchar(t_list *p, char letter)
 	char c;
 
 	if (letter != '%')
-		c = va_arg(p->ap, int);
+		c = getnb(p, 0);
 	if ((p->precision != -1 || p->width != -1)
 			&& letter == '%')
 		ft_putcharnf(p);
