@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 13:54:53 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/31 15:03:42 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/01 14:05:54 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_list	*create_struct(void)
 
 	if (!(p = (t_list*)malloc(sizeof(t_list))))
 		return (0);
+	p->brett = 0;
 	p->nbout = 0;
 	p->precision = -1;
 	p->width = -1;

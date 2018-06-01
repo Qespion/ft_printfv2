@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/31 17:28:07 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/01 16:44:11 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	prints(t_list *p)
 {
 	char*	str;
 
+	if (p->l)
+	{
+		printlstring(p);
+		return ;
+	}
 	str = va_arg(p->ap, char*);
 	if (!str)
 		str = "(null)";
@@ -61,7 +66,7 @@ void	ft_get_arg(char letter, t_list *p)
 	if (letter == 's' || letter == 'd' || letter == 'c' || letter == 'x'
 			|| letter == 'b' || letter == 'i' || letter == 'X' || letter == 'u'
 			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D'
-			|| letter == '%' || letter == 'p' || letter == 'C')
+			|| letter == '%' || letter == 'p' || letter == 'C' || letter == 'S')
 		p->increment = 1;
 	if (letter == 's')
 		prints(p);
@@ -89,4 +94,6 @@ void	ft_get_arg(char letter, t_list *p)
 		printunicode(p);
 	else if (letter == 'b')
 		printbinary(p);
+	else if (letter == 'S')
+		printlstring(p);
 }

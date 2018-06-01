@@ -83,7 +83,7 @@ void	ft_putstrn(t_list *p, char *str);
 t_list	*create_struct(void);
 t_list	*reset_struct(t_list *p);
 void	ft_get_arg(char letter, t_list *p);
-int		printunicode(t_list *p);
+void	printunicode(t_list *p);
 char	*ft_convert_binary(uintmax_t nb);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *dest, const char *src);
@@ -96,4 +96,9 @@ void	printbinary(t_list *p);
 
 void	ft_putstrn_octal(t_list *p, char *str);
 int		checkunicode(t_list *p);
+void	break_bin(char *binary, t_list *p);
+
+void	print_uni_width(t_list *p, int nlen);
+void	printlstring(t_list *p);
+
 #endif

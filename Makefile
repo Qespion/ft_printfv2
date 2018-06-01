@@ -27,7 +27,8 @@ SRC         =     srcs/ft_printf.c	\
 				  srcs/printbinary.c	\
 				  srcs/ft_strjoin.c		\
 				  srcs/ft_bzero.c		\
-				  srcs/ft_strcat.c
+				  srcs/ft_strcat.c		\
+				  srcs/printlstring.c
 
 
 C_GREEN	=	"\033[32m"

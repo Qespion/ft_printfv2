@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 12:37:33 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/31 19:14:25 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/01 18:10:32 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,30 +94,34 @@ void	break_bin(char *binary, t_list *p)
 	p->negative ? print_uni_width(p, tmp) : 0;
 }
 
-int		printunicode(t_list *p)
+void		printunicode(t_list *p)
 {
 	int		brett;
 	char	*binary;
 
 	!p->brett ? brett = va_arg(p->ap, int) : 0;
 	p->brett ? brett = p->brett : 0;
+	p->brett = 0;
 	if ((MB_CUR_MAX == 1 && brett > 255) || (brett <= 917759 && brett >= 917632)
-			|| (brett <= 196608 && brett >= 917503)|| (brett >= 918000 && brett <= 983039)
-			|| (brett >= 55296 && brett <= 57343)|| (brett >= 196608 && brett <= 917503)
-			|| brett >= 1114112)
+			|| (brett >= 918000 && brett <= 983039)
+			|| (brett >= 55296 && brett <= 57343)
+			|| brett >= 1114112 || brett < 0)
 	{
 		p->brett = -1;
-		return (0);
+		return ;
 	}
-	if (brett < 256)
+	//ft_putnbr(MB_CUR_MAX);
+	if (brett <= 128)
 	{
+		!p->negative ? print_uni_width(p, 1) : 0;
 		write(1, &brett, 1);
-		p->nbout++;
-		return (1);
+		p->negative ? print_uni_width(p, 1) : 0;
+		brett >= 128 ? p->nbout += 2 : p->nbout++;
+		return ;
 	}
 	binary = ft_convert_base(brett, 2);
 	break_bin(binary, p);
-	return (1);
+	return ;
 }
 
 int		checkunicode(t_list *p)
@@ -127,9 +131,9 @@ int		checkunicode(t_list *p)
 	brett = va_arg(p->ap, int);
 //	printf("brett is equal to = %d\n", brett);
 	if ((MB_CUR_MAX == 1 && brett > 255) || (brett <= 917759 && brett >= 917632)
-			|| (brett <= 196608 && brett >= 917503)|| (brett >= 918000 && brett <= 983039)
-			|| (brett >= 55296 && brett <= 57343)|| (brett >= 196608 && brett <= 917503)
-			|| brett >= 1114112)
+			|| (brett >= 918000 && brett <= 983039)
+			|| (brett >= 55296 && brett <= 57343)
+			|| brett >= 1114112 || brett < 0)
 	{
 		p->brett = -1;
 		return (1);
