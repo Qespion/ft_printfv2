@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:06:39 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/01 13:27:03 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:42:40 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ uintmax_t	getunb(t_list *p, int maj)
 {
 	uintmax_t	nb;
 
-	if (p->l || maj)
+	if (p->h)
+		nb = (unsigned short)va_arg(p->ap, unsigned int);
+	else if (p->hh)
+		nb = (unsigned char)va_arg(p->ap, unsigned int);
+	else if (p->l || maj)
 		nb = va_arg(p->ap, unsigned long);
 	else if (p->ll)
 		nb = va_arg(p->ap, unsigned long long);
@@ -45,10 +49,6 @@ uintmax_t	getunb(t_list *p, int maj)
 		nb = va_arg(p->ap, size_t);
 	else if (p->j)
 		nb = va_arg(p->ap, uintmax_t);
-	else if (p->h)
-		nb = (unsigned short)va_arg(p->ap, unsigned int);
-	else if (p->hh)
-		nb = (unsigned char)va_arg(p->ap, unsigned int);
 	else
 		nb = va_arg(p->ap, unsigned int);
 	return (nb);

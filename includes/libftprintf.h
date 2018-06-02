@@ -60,7 +60,7 @@ void	ft_putstr(char *str);
 void	ft_strdel(char **as);
 int	ft_atoi(const char *str);
 void	printchar(t_list *p, char letter);
-void	ft_putcharnf(t_list *p);
+void	ft_putcharnf(t_list *p, char letter);
 void	ft_putcharn(t_list *p, char c);
 void	ft_putnbr(intmax_t nb);
 uintmax_t	ft_abs(long long nb);

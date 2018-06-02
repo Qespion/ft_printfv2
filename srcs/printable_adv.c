@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:34:52 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/02 11:57:48 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 15:20:50 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		printc(t_list *p)
 {
 	int		brett;
 
-	brett = getnb(p, 0);
+	!p->brett ? brett = getnb(p, 0) : 0;
+	p->brett ? brett = p->brett : 0;
 	if (p->l)
 	{
 		p->brett = brett;
@@ -55,16 +56,16 @@ int		printc(t_list *p)
 
 void	printchar(t_list *p, char letter)
 {
-	if (letter != '%')
+	if (letter == 'c')
 	{
 		printc(p);
 		return ;
 	}
 	if ((p->precision != -1 || p->width != -1)
-			&& letter == '%')
-		ft_putcharnf(p);
+			&& letter != 'c')
+		letter != '\0' ? ft_putcharnf(p, letter) : 0;
 	else
-	{
-		ft_putchar('%');
-	}
+		letter != '\0' ? ft_putchar(letter) : 0;
+	letter != '\0' ? p->nbout++ : 0;
+	letter != '\0' ? p->increment++ : 0;
 }

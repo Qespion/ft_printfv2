@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 15:33:10 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/02 11:38:12 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:21:01 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ void	printlstring(t_list *p)
 	output = 0;
 	nlen = 0;
 	brett_tab = va_arg(p->ap, wchar_t*);
+	if (!brett_tab)
+	{
+		ft_putstrn(p, "(null)");
+		return ;
+	}
 	while (brett_tab[nlen])
 		nlen++;
 	r = 0;

@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 11:52:36 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/02 11:55:46 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:12:52 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ const char	*ft_width(const char *format, t_list *p)
 		if (*format == '*')
 		{
 			p->width = va_arg(p->ap, int);
+			if (p->width < 0)
+			{
+				p->negative = 1;
+				p->width = ft_abs(p->width);
+			}
 			format++;
 		}
 	}
@@ -73,6 +78,7 @@ const char	*ft_precision(const char *format, t_list *p)
 			if (*format == '*')
 			{
 				p->precision = va_arg(p->ap, int);
+				p->precision < 0 ? p->precision = -1 : 0;
 				format++;
 			}
 		}
@@ -104,7 +110,9 @@ const char	*ft_lenght_mod(const char *format, t_list *p)
 int checkafter(const char* format, t_list *p)
 {
 	int	r;
+	int	l;
 
+	l = 0;
 	r = 0;
 	while (format[r] != '%' && format[r])
 		r++;
@@ -116,8 +124,11 @@ int checkafter(const char* format, t_list *p)
 		&& format[r] != 'o' && format[r] != 'O' && format[r] != 'U' && format[r] != 'D'
 		&& format[r] != '%' && format[r] != 'p' && format[r] != 'C' && format[r] != 'S'
 		&& format[r])
+		{
+			format[r] == 'l' && format[r + 1] != 'l' && format[r - 1] != 'l' ? l = 1 : 0;
 			r++;
-		if (format[r] == 'C')
+		}
+		if (format[r] == 'C' || (format[r] == 'c' && l == 1))
 		{
 			if (checkunicode(p))
 				return (0);
@@ -133,6 +144,8 @@ int	ft_printf(const char* format, ...)
 
 	p = create_struct();
 	va_start(p->ap, format);
+	if (!format)
+		return (0);
 	while (*format)
 	{
 		if (*format == '%')
@@ -143,10 +156,7 @@ int	ft_printf(const char* format, ...)
 			format = ft_precision(format, p);
 			format = ft_lenght_mod(format, p);
 		}
-/*		ft_putstr("\n letter is = ");
-		ft_putchar(*format);
-		ft_putchar('\n');*/
-		*format == '%' ? p->nbout++ : 0;
+		//*format == '%' ? p->nbout++ : 0;
 		p->increment ? format++ : 0;
 		if (checkafter(format, p) == 1)
 		{

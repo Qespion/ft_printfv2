@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:37:15 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/01 16:44:11 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:42:13 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	printoctal(t_list *p, int maj)
 	char		*total;
 
 	p->hexa = 0;
-	nb = getunb(p, 0);
+	nb = getunb(p, maj);
 	total = ft_convert_base(nb, 8);
 	total[0] == '\0' ? total = "0" : 0;
 	if (maj)
@@ -66,13 +66,13 @@ void	ft_get_arg(char letter, t_list *p)
 	if (letter == 's' || letter == 'd' || letter == 'c' || letter == 'x'
 			|| letter == 'b' || letter == 'i' || letter == 'X' || letter == 'u'
 			|| letter == 'o' || letter == 'O' || letter == 'U' || letter == 'D'
-			|| letter == '%' || letter == 'p' || letter == 'C' || letter == 'S')
+			|| letter == 'p' || letter == 'C' || letter == 'S')
 		p->increment = 1;
 	if (letter == 's')
 		prints(p);
 	else if (letter == 'd' || letter == 'i')
 		printnb(p, 0);
-	else if (letter == 'c' || letter == '%')
+	else if (letter == 'c' || p->increment == 0)
 		printchar(p, letter);
 	else if (letter == 'D')
 		printnb(p, 1);

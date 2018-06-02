@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:09:47 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/14 17:47:49 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 15:22:32 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_putcharn(t_list *p, char c)
 		}
 }
 
-void	ft_putcharnf(t_list *p)
+void	ft_putcharnf(t_list *p, char letter)
 {
 	int		len_width;
 	char	*str;
@@ -55,7 +55,7 @@ void	ft_putcharnf(t_list *p)
 			ft_putchar(spaces);
 		}
 	str = (char*)p->str;
-	ft_putchar('%');
+	ft_putchar(letter);
 	if (p->negative == 1)
 		while (len_width++ < p->width)
 		{

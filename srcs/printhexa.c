@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 14:35:35 by oespion           #+#    #+#             */
-/*   Updated: 2018/05/31 16:22:42 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 16:42:48 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	printhexa(t_list *p, int maj)
 	char		*total;
 
 	p->hexa = 1;
-	nb = getunb(p, 0);
+	nb = getunb(p, maj);
 	total = ft_convert_base(nb, 16);
 	total[0] == '\0' ? total = "0" : 0;
 	if (maj)
