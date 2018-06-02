@@ -96,7 +96,7 @@ void	printbinary(t_list *p);
 
 void	ft_putstrn_octal(t_list *p, char *str);
 int		checkunicode(t_list *p);
-void	break_bin(char *binary, t_list *p);
+void	break_bin(char *binary, t_list *p, int brett);
 
 void	print_uni_width(t_list *p, int nlen);
 void	printlstring(t_list *p);

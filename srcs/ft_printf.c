@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 11:52:36 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/01 18:11:48 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 11:55:46 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	ft_printf(const char* format, ...)
 		p->increment ? format++ : 0;
 		if (checkafter(format, p) == 1)
 		{
-			while (*format != '\0' && *format != '%')
+			while (*format != '\0' && *format != '%' && p->brett != -1)
 			{
 				p->nbout++;
 				ft_putchar((char)*format);
@@ -168,7 +168,7 @@ int	ft_printf(const char* format, ...)
 //	printf("width = %d\n", p->width);
 	outnbr = (p->brett == -1 ? -1 : p->nbout);
 //	printf("\nstdout = %d\n", outnbr);
-//	printf("pbrett === %d\n", outnbr);
+//	printf("\npbrett === %d\n", outnbr);
 	//ft_strdel(&p->base_str);
 	free(p);
 	return (outnbr);

@@ -6,7 +6,7 @@
 /*   By: oespion <oespion@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 12:37:33 by oespion           #+#    #+#             */
-/*   Updated: 2018/06/01 18:10:32 by oespion          ###   ########.fr       */
+/*   Updated: 2018/06/02 10:28:19 by oespion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	print_rest(char *binary, int index)
 	write(1, &r, 1);
 }
 
-void	break_bin(char *binary, t_list *p)
+void	break_bin(char *binary, t_list *p, int brett)
 {
 	int	r;
 	int	nlen;
@@ -80,6 +80,7 @@ void	break_bin(char *binary, t_list *p)
 	nlen = r / 6;
 	if (r > 0)
 		nlen += (r % 6 < 5) ? 1 : 2;
+	brett >= 65536 ? nlen = 4 : 0;
 	index = (ft_strlen(binary) - (nlen - 1) * 6);
 	!p->negative ? print_uni_width(p, nlen) : 0;
 	tmp = nlen;
@@ -111,16 +112,16 @@ void		printunicode(t_list *p)
 		return ;
 	}
 	//ft_putnbr(MB_CUR_MAX);
-	if (brett <= 128)
+	if (brett <= 127 || (brett <= 255 && MB_CUR_MAX == 1))
 	{
 		!p->negative ? print_uni_width(p, 1) : 0;
 		write(1, &brett, 1);
 		p->negative ? print_uni_width(p, 1) : 0;
-		brett >= 128 ? p->nbout += 2 : p->nbout++;
+		p->nbout++;
 		return ;
 	}
 	binary = ft_convert_base(brett, 2);
-	break_bin(binary, p);
+	break_bin(binary, p, brett);
 	return ;
 }
 
